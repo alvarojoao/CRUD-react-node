@@ -1,0 +1,222 @@
+@font-face {
+    font-family: 'customIcon';
+    src:    url('fonts/customIcon.eot?ycrd2g');
+    src:    url('fonts/customIcon.eot?ycrd2g#iefix') format('embedded-opentype'),
+        url('fonts/customIcon.ttf?ycrd2g') format('truetype'),
+        url('fonts/customIcon.woff?ycrd2g') format('woff'),
+        url('fonts/customIcon.svg?ycrd2g#customIcon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'customIcon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pencil:before {
+    content: "\e906";
+}
+.icon-pencil2:before {
+    content: "\e907";
+}
+.icon-bin:before {
+    content: "\e908";
+}
+.icon-cancel-circle:before {
+    content: "\e909";
+}
+
+
+
+body {
+	background-color: #f9f9f9;
+	padding: 10px;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.less {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.articles-search{
+	background-color: #dddddd;
+	padding:20px;
+
+}
+
+.articles-form{
+	background-color: #018cb7;
+	padding:20px;
+}
+
+.articles-list{
+	background-color: #f9f9f9;
+	padding:20px;
+}
+.articles-list .article [class*=" icon-"]{
+	padding-right: 10px;
+}
+.articles-list .article form ul.form-errors{
+  display: none;
+}
+.articles-list .article-item{
+	color:#272727;
+}
+
+.articles-list .article-item h1,.articles-list .article-item a,.articles-list .article-item p,.articles-list .article-item small{
+	display: block;	
+}
+.articles-list .article-item p{
+}
+
+.articles-form form input{
+	margin-bottom: 10px;
+}
+
+.articles-form form textarea{
+	margin-bottom: 10px;
+}
+
+
+@media (min-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+
+
+
+}
+
+
+@media (min-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+
+}
+
+
+
+
+
+/*Custom form elements like: checkbox, radio, select, input etc...*/
+/*I alread did those in another job*/
+
+label.ps-frm-lbl{
+  display:block;
+  padding:7px 0;
+  position:relative;
+  font-size:14px;
+  padding-right:14px
+}
+.ps-frm-entry{
+  border-radius:2px;
+  background:#fff;
+  border:1px solid #ddd;
+  width:100%;
+  font-size:14px;
+  line-height:19.5px;
+  padding:10.5px;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+  outline:none;
+  -webkit-appearance:none;
+  font-weight:bold;
+  color:#00adef
+}
+.ps-frm-entry:focus{
+  outline:2px solid #00adef
+}
+.ps-frm-entry:disabled{
+  background:#ddd;
+  color:#5a5a5a;
+  cursor:not-allowed
+}
+.ps-frm-entry::-webkit-input-placeholder{
+  font-weight:normal;
+  font-size:14px;
+  color:#ddd
+}
+.ps-frm-entry:-moz-placeholder{
+  font-weight:normal;
+  font-size:14px;
+  color:#ddd
+}
+.ps-frm-entry::-moz-placeholder{
+  font-weight:normal;
+  font-size:14px;
+  color:#ddd
+}
+.ps-frm-entry:-ms-input-placeholder{
+  font-weight:normal;
+  font-size:14px;
+  color:#ddd
+}
+/*End of Custon form elements*/
+
+/*Custon button based on Bootstrap*/
+a.ps-btn,input.ps-btn,button.ps-btn{
+  font-family:Arial,Sans-serif;
+  /*font-family:'open_sans',Arial,Sans-serif;*/
+  font-weight:bold;
+  width:100%;
+  -moz-box-sizing:border-box;
+  box-sizing:border-box;
+  cursor:pointer;
+  display:block;
+  padding:10.5px;
+  background:#d3d3d3;
+  border-radius:2px;
+  text-align:center;
+  font-size:13px;
+  line-height:21px;
+  border:0;
+  -webkit-appearance:none;
+  color:#006e99;
+  text-transform:uppercase;
+  -webkit-transition:all .2s ease-out 0s;
+  -moz-transition:all .2s ease-out 0s;
+  -ms-transition:all .2s ease-out 0s;
+  -o-transition:all .2s ease-out 0s;
+  transition:all .2s ease-out 0s;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  color:#006389;
+  text-decoration:none
+}
+a.ps-btn:hover,input.ps-btn:hover,button.ps-btn:hover{
+  background-color:#b9b9b9;
+  color:#006e99
+}
+a.ps-btn:active,input.ps-btn:active,button.ps-btn:active{
+  background-color:#d3d3d3;
+  outline:none;
+  color:#006e99
+}
+a.ps-btn:focus,input.ps-btn:focus,button.ps-btn:focus{
+  outline:none
+}
+a.ps-btn.ps-btn-disabled,input.ps-btn.ps-btn-disabled,button.ps-btn.ps-btn-disabled{
+  background-color:#f9f9f9;
+  cursor:not-allowed;
+  border-color:#adadad;
+  color:#adadad
+}
+a.ps-btn:disabled:hover,input.ps-btn:disabled:hover,button.ps-btn:disabled:hover{
+  color:#adadad !important
+}
+/*end of custom buttom*/
