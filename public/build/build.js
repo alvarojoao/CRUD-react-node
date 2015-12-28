@@ -20228,8 +20228,8 @@ var Article = React.createClass({displayName: "Article",
   render: function() {
     return (
       React.createElement("div", {className: "article"}, 
-        React.createElement("span", null, React.createElement("a", {href: "#", className: "icon-bin", onClick: this.deleteArticle}, "Delete")), 
-        React.createElement("span", null, React.createElement("a", {href: "#", className: "icon-pencil", onClick: this.editArticle}, "Edit")), 
+        React.createElement("span", null, React.createElement("a", {href: "javascript:void(0);", className: "icon-bin", onClick: this.deleteArticle}, "Delete")), 
+        React.createElement("span", null, React.createElement("a", {href: "javascript:void(0);", className: "icon-pencil", onClick: this.editArticle}, "Edit")), 
         this.state.editing ? this.renderForm() : this.renderArticle(), 
         this.state.editing ? React.createElement("input", {type: "button", onClick: this.cancelEditArticle, value: "cancel", className: "ps-btn ps-btn-alert"}):""
 
@@ -20239,9 +20239,9 @@ var Article = React.createClass({displayName: "Article",
   renderArticle: function() {
     return(React.createElement("div", {className: "article-item"}, 
               React.createElement("h1", null, this.props.article.title), 
+              React.createElement("small", null, this.props.article.publishedDate), 
               React.createElement("p", {className: "content less"}, this.props.article.content), 
-              React.createElement("a", {href: "#", onClick: this.readMore}, "read more"), 
-              React.createElement("small", null, this.props.article.publishedDate)
+              React.createElement("a", {href: "javascript:void(0);", onClick: this.readMore}, "read more")
            ));
   },
   renderForm: function() {
@@ -20252,7 +20252,8 @@ var Article = React.createClass({displayName: "Article",
     };
     var options = {
       onSubmit: this.handleEdit,
-      content: { type: 'textarea' }
+      content: { type: 'textarea' , className:'ps-frm-entry'},
+      title: { className:'ps-frm-entry'}
     };
     return(React.createElement(ArticleForm, {object: object, options: options, errors: this.props.errors}));
   },
@@ -20661,7 +20662,7 @@ module.exports = FormFor = React.createClass({displayName: "FormFor",
       React.createElement("form", {onSubmit: this.handleSubmit}, 
         React.createElement(FormErrors, {errors: this.props.errors}), 
         this.inputs(), 
-        React.createElement("input", {type: "submit", value: this.submitText(), className: "ps-btn "})
+        React.createElement("input", {type: "submit", value: this.submitText(), className: "ps-btn ps-btn-primary"})
       )
     );
   },

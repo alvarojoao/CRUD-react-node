@@ -12,7 +12,7 @@ module.exports = FormFor = React.createClass({
       <form onSubmit={this.handleSubmit}>
         <FormErrors errors={this.props.errors} />
         {this.inputs()}
-        <input type="submit"  value={this.submitText()} className="ps-btn "/>
+        <input type="submit"  value={this.submitText()} className="ps-btn ps-btn-primary"/>
       </form>
     );
   },

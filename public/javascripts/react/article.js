@@ -19,8 +19,8 @@ var Article = React.createClass({
   render: function() {
     return (
       <div className="article">
-        <span><a href="#" className="icon-bin" onClick={this.deleteArticle}>Delete</a></span>
-        <span><a href="#" className="icon-pencil" onClick={this.editArticle}>Edit</a></span>
+        <span><a href="javascript:void(0);" className="icon-bin" onClick={this.deleteArticle}>Delete</a></span>
+        <span><a href="javascript:void(0);" className="icon-pencil" onClick={this.editArticle}>Edit</a></span>
         {this.state.editing ? this.renderForm() : this.renderArticle()}
         {this.state.editing ? <input type="button" onClick={this.cancelEditArticle} value="cancel" className="ps-btn ps-btn-alert"/>:""}
 
@@ -30,9 +30,9 @@ var Article = React.createClass({
   renderArticle: function() {
     return(<div className='article-item'>
               <h1>{this.props.article.title}</h1>
-              <p className='content less'>{this.props.article.content}</p>
-              <a href="#" onClick={this.readMore}>read more</a>
               <small>{this.props.article.publishedDate}</small>
+              <p className='content less'>{this.props.article.content}</p>
+              <a href="javascript:void(0);" onClick={this.readMore}>read more</a>
            </div>);
   },
   renderForm: function() {
@@ -43,7 +43,8 @@ var Article = React.createClass({
     };
     var options = {
       onSubmit: this.handleEdit,
-      content: { type: 'textarea' }
+      content: { type: 'textarea' , className:'ps-frm-entry'},
+      title: { className:'ps-frm-entry'}
     };
     return(<ArticleForm object={object} options={options} errors={this.props.errors} />);
   },

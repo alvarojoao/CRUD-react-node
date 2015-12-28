@@ -7,6 +7,26 @@ var articles = [],
 	Article = require('../models/article.server.model.js');
 var fs = require('fs');
 
+function prettyDate(time){
+    var date = new Date(time || ""),
+        diff = ((new Date().getTime() - date.getTime()) / 1000),
+        day_diff = Math.floor(diff / 86400);
+
+    if (isNaN(day_diff) || day_diff < 0 || day_diff >= 31) {
+        return;
+    }
+
+    return day_diff == 0 && (
+            diff < 60 && "just now" ||
+            diff < 120 && "1 minute ago" ||
+            diff < 3600 && Math.floor( diff / 60 ) + " minutes ago" ||
+            diff < 7200 && "1 hour ago" ||
+            diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
+        day_diff == 1 && "Yesterday" ||
+        day_diff < 7 && day_diff + " days ago" ||
+        day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
+};
+
 function findArticle(id){
 	var articleFilterd = articles.filter(function(obj){
 		if(obj.id == id)
@@ -15,10 +35,12 @@ function findArticle(id){
 	var article = {};
 	if(articleFilterd.length>0){
 		article = articleFilterd[0];
+		article.publishedDate = prettyDate(article.publishedDate);
 		return article
 	}else
 		return undefined;
 };
+
 function addArticle(article){
 	article.id = articles.length+1;
 	articles.push(article);
@@ -48,12 +70,16 @@ function updateArticle(id,articleUpdated){
 
 	if(articleIndexs.length>0){
 		var index = articleIndexs[0];
-		articles[index] = articleUpdated;
+		articles[index].title = articleUpdated.title;
+		articles[index].content = articleUpdated.content;
 		return true;
 	}else{
 		return false;
 	}
 };
+
+
+
 /**
  * Create a article
  */
@@ -62,7 +88,9 @@ exports.create = function(req, res) {
 		console.log(req.body);
 		var article = new Article(req.body);
 		addArticle(article);
-		res.json(article);
+		var articleCl =  JSON.parse(JSON.stringify(article))
+		articleCl.publishedDate = prettyDate(article.publishedDate);
+		res.json(articleCl);
 	}catch(err){
 		console.log(err);
 		return res.status(400).send(err);
@@ -110,7 +138,9 @@ exports.update = function(req, res) {
 	var article = updateArticle(id,articleUpdated);
 
 	if(article){
-		res.json(articleUpdated);
+		var articleCl =  JSON.parse(JSON.stringify(articleUpdated))
+		articleCl.publishedDate = prettyDate(articleUpdated.publishedDate);
+		res.json(articleCl);
 
 	}else{
 		return res.status(404).send({
@@ -157,10 +187,17 @@ function compareByPublishedDate(a,b) {
         return -1;
     }
 };
+
 exports.list = function(req, res){
 
 	articles.sort(compareByPublishedDate);
-	res.json(articles);
+	var articlesReturn = [];
+	articles.forEach(function(obj){
+		var articleCl =  JSON.parse(JSON.stringify(obj))
+		articleCl.publishedDate = prettyDate(obj.publishedDate);
+		articlesReturn.push(articleCl);
+	});
+	res.json(articlesReturn);
 
 };
 

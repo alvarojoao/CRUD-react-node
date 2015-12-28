@@ -40,8 +40,9 @@
 
 
 body {
+  float: left;
 	background-color: #f9f9f9;
-	padding: 10px;
+  margin:0;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -56,24 +57,60 @@ a {
   text-overflow: ellipsis;
 }
 
+.articles,.articles-search,.articles-list,.articles-form {
+  float:left;
+}
+.articles{
+  padding:15px;
+  width: 90%;
+}
+.articles-search{
+  width: 90%;
+}
+.articles-form{
+  width: 90%;
+}
 
 .articles-search{
 	background-color: #dddddd;
 	padding:20px;
-
+  margin-bottom: 20px
 }
-
+.articles-search label.ps-frm-lbl{
+  display: none!important;
+}
 .articles-form{
-	background-color: #018cb7;
+	background-color: #7598bb;
 	padding:20px;
 }
+
 
 .articles-list{
 	background-color: #f9f9f9;
-	padding:20px;
+  float: left;
+  width: 90%;
 }
-.articles-list .article [class*=" icon-"]{
-	padding-right: 10px;
+.articles-list .article{
+  padding:20px;
+  border:1px solid black;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  float: left;
+  width: 100%;
+}
+.articles-list .article input{
+  float: left;
+}
+.articles-list .article .article-item small{
+    margin-top: -1.67em;
+
+}
+.articles-list .article .icon-pencil{
+  text-decoration: none;
+}
+.articles-list .article .icon-bin{
+  text-decoration: none;
+  float:right;
 }
 .articles-list .article form ul.form-errors{
   display: none;
@@ -99,7 +136,26 @@ a {
 
 @media (min-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
 
+  .articles{
+    padding:20px;
+  }
+  .articles-search label.ps-frm-lbl{
+    display: block!important;
+  }
+  .articles-list form textarea {
+      height: 120px;
+  }
 
+
+  .articles-form form .ps-btn{
+        width: 50%;
+  }
+  .articles-form form textarea{
+    height: 120px;
+  }
+  .articles-list .article input.ps-btn{
+    width: 50%
+  }
 
 }
 
@@ -165,6 +221,28 @@ label.ps-frm-lbl{
   font-size:14px;
   color:#ddd
 }
+a.ps-btn-primary,input.ps-btn-primary,button.ps-btn-primary{
+  background-color:#00adef!important;
+  border-color:#00adef!important;
+  color:#fff
+}
+a.ps-btn-primary:hover,input.ps-btn-primary:hover,button.ps-btn-primary:hover{
+  border-color:#018cb7!important;
+  background-color:#018cb7!important;
+  color:#fff !important
+}
+a.ps-btn-primary:active,input.ps-btn-primary:active,button.ps-btn-primary:active{
+  border-color:#07c3fe!important;
+  background-color:#07c3fe!important;
+  outline:none!important;
+  color:#fff!important;
+}
+a.ps-btn-primary:focus,input.ps-btn-primary:focus,button.ps-btn-primary:focus{
+  outline:none!important;
+  color:#fff!important;
+}
+
+
 /*End of Custon form elements*/
 
 /*Custon button based on Bootstrap*/
