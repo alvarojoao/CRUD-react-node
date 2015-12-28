@@ -7,6 +7,8 @@ var articles = [],
 	Article = require('../models/article.server.model.js');
 var fs = require('fs');
 
+/*Function that make the date pretty with a cool and easy reading of the date/time
+*/
 function prettyDate(time){
     var date = new Date(time || ""),
         diff = ((new Date().getTime() - date.getTime()) / 1000),
@@ -26,7 +28,21 @@ function prettyDate(time){
         day_diff < 7 && day_diff + " days ago" ||
         day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
 };
+/*Function that makes the comparations between date to order the array/list*/
+function compareByPublishedDate(a,b) {
+	var key1 = new Date(a.publishedDate);
+    var key2 = new Date(b.publishedDate);
 
+    if (key1 < key2) {
+        return 1;
+    } else if (key1 == key2) {
+        return 0;
+    } else {
+        return -1;
+    }
+};
+
+/*Transational 'db' operations: Find and article with a particular id*/
 function findArticle(id){
 	var articleFilterd = articles.filter(function(obj){
 		if(obj.id == id)
@@ -41,10 +57,13 @@ function findArticle(id){
 		return undefined;
 };
 
+/*Transational 'db' operations: Add and article with a particular id*/
 function addArticle(article){
 	article.id = articles.length+1;
 	articles.push(article);
 };
+
+/*Transational 'db' operations: Remove and article with a particular id*/
 function removeArticle(id){
 	var articleIndexs = articles.map(function(obj, index) {
 	    if(obj.id == id) {
@@ -60,6 +79,8 @@ function removeArticle(id){
 		return false;
 	}
 };
+
+/*Transational 'db' operations: Update and article with a particular id*/
 function updateArticle(id,articleUpdated){
 	var articleIndexs = articles.map(function(obj, index) {
 	    if(obj.id == id) {
@@ -81,7 +102,7 @@ function updateArticle(id,articleUpdated){
 
 
 /**
- * Create a article
+ * Create a article / route operation
  */
 exports.create = function(req, res) {
 	try{
@@ -98,7 +119,7 @@ exports.create = function(req, res) {
 };
 
 /**
- * Show the current article
+ * Show the current article / route operation
  */
 exports.read = function(req, res) {
 	var id  = req.params.articleId;
@@ -118,7 +139,7 @@ exports.read = function(req, res) {
 };
 
 /**
- * Update a article
+ * Update a article / route operation
  */
 exports.update = function(req, res) {
 	var id  = req.params.articleId;
@@ -151,7 +172,7 @@ exports.update = function(req, res) {
 };
 
 /**
- * Delete an article
+ * Delete an article / route operation
  */
 exports.delete = function(req, res) {
 	var id  = req.params.articleId;
@@ -172,22 +193,10 @@ exports.delete = function(req, res) {
 	}
 };
 
+
 /**
- * List of Articles
+ * List of Articles / route operation
  */
-function compareByPublishedDate(a,b) {
-	var key1 = new Date(a.publishedDate);
-    var key2 = new Date(b.publishedDate);
-
-    if (key1 < key2) {
-        return 1;
-    } else if (key1 == key2) {
-        return 0;
-    } else {
-        return -1;
-    }
-};
-
 exports.list = function(req, res){
 
 	articles.sort(compareByPublishedDate);

@@ -1,4 +1,5 @@
-// Constructor
+
+/*Constructor/ Model for Articles, It also makes the db or models validations.*/
 function Article(object) {
   // always initialize all instance properties
   if(!object){
@@ -13,12 +14,11 @@ function Article(object) {
   this.content = object.content; // default value
   this.publishedDate = new Date(); // default value
 }
-// class methods
-Article.prototype.id = -1;
 
+/*Validation Exception returning a custom message*/
 function ArticleException(message) {
    this.message = message;
-   // this.key = "ArticleException";
 };
+
 // export the class
 module.exports = Article;

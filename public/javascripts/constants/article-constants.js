@@ -1,3 +1,4 @@
+/*Constants used to mark the actions types*/
 var ArticleConstants = {
   ActionTypes: {
     CREATE_Article: 'CREATE_Article',

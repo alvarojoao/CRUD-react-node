@@ -12,9 +12,6 @@ var Article = React.createClass({
     };
   },
   componentDidMount: function() {
-    // ArticleStore.addChangeEvent(function(data) {
-    //   if(this.isMounted()) this.setState({ editing: false });
-    // }.bind(this))
   },
   render: function() {
     return (

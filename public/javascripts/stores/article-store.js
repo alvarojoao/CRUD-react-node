@@ -48,7 +48,6 @@ var ArticleStore = (function() {
       li.innerHTML = data.message;
       ul.appendChild(li);
       frm.insertBefore(ul,frm.firstChild);
-        // if(Articles.isMounted()) Articles.setState({ errors: data_ });
     },
     create: function(article,Articles) {
       Utils.sendJSON('/api/blog/article','post',{data:article,object:this},function(response,object){
