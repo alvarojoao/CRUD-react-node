@@ -40,6 +40,7 @@
 
 
 body {
+  min-width: 100%;
   float: left;
 	background-color: #f9f9f9;
   margin:0;
