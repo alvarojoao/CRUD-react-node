@@ -60,9 +60,13 @@ var Article = React.createClass({
   },
   editArticle: function() {
     if(this.isMounted()) this.setState({ editing: true });
+    document.getElementById('articles-form').getElementsByClassName('ps-btn')[0].classList.add('ps-btn-disabled');
+    document.getElementById('articles-form').getElementsByClassName('ps-btn')[0].disabled = true;
   },
   cancelEditArticle: function() {
     if(this.isMounted()) this.setState({ editing: false });
+    document.getElementById('articles-form').getElementsByClassName('ps-btn')[0].classList.remove('ps-btn-disabled');
+    document.getElementById('articles-form').getElementsByClassName('ps-btn')[0].disabled = false;
   },
   deleteArticle: function() {
     this.props.handleDelete(this.props.article.id);

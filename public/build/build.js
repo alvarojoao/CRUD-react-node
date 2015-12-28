@@ -20268,9 +20268,13 @@ var Article = React.createClass({displayName: "Article",
   },
   editArticle: function() {
     if(this.isMounted()) this.setState({ editing: true });
+    document.getElementById('articles-form').getElementsByClassName('ps-btn')[0].classList.add('ps-btn-disabled');
+    document.getElementById('articles-form').getElementsByClassName('ps-btn')[0].disabled = true;
   },
   cancelEditArticle: function() {
     if(this.isMounted()) this.setState({ editing: false });
+    document.getElementById('articles-form').getElementsByClassName('ps-btn')[0].classList.remove('ps-btn-disabled');
+    document.getElementById('articles-form').getElementsByClassName('ps-btn')[0].disabled = false;
   },
   deleteArticle: function() {
     this.props.handleDelete(this.props.article.id);
@@ -20413,7 +20417,11 @@ var ArticleStore = (function() {
     updateArticleEdit: function(Article,article) {
        if(Article.isMounted()){ 
           Article.props.article = article;
-          Article.setState({ editing: false });}
+          Article.setState({ editing: false });
+          document.getElementById('articles-form').getElementsByClassName('ps-btn')[0].classList.remove('ps-btn-disabled');
+          document.getElementById('articles-form').getElementsByClassName('ps-btn')[0].disabled = false;
+  
+        }
     },
     failArticles: function(Articles,data) {
       var data_ = []; data_.push(data);
@@ -20433,8 +20441,15 @@ var ArticleStore = (function() {
     create: function(article,Articles) {
       Utils.sendJSON('/api/blog/article','post',{data:article,object:this},function(response,object){
         var article = JSON.parse(response);
-        _articles.unshift(article);
-        object._articles = _articles;
+        object._articles.unshift(article);
+        // object._articles = _articles;
+        _articles = object._articles.filter(function(object){
+                    var text = Articles.query;
+                    if(!text||((object.title.toLowerCase().indexOf(text.toLowerCase())>-1)
+                          ||(object.content.toLowerCase().indexOf(text.toLowerCase())>-1))) {
+                      return object
+                    }
+                  });
         object.resetFields();
         object.updateArticles(Articles,_articles);
       },function(msg,object){
