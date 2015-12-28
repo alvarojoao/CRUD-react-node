@@ -20110,7 +20110,10 @@ module.exports = require('./lib/React');
 },{"./lib/React":32}],160:[function(require,module,exports){
 var ArticleDispatcher = require('../dispatchers/article-dispatcher');
 var ArticleConstants = require('../constants/article-constants');
+  /*Actions Dispatcher*/
+
 var ArticleActions = {
+  /*Create a dispatcher call for creat Article*/
   createArticle: function(data,Articles) {
     ArticleDispatcher.handleViewAction({
       type: ArticleConstants.ActionTypes.CREATE_Article,
@@ -20118,6 +20121,7 @@ var ArticleActions = {
       Articles:Articles
     });
   },
+  /*Create a dispatcher call for update Article*/
   updateArticle: function(data,Articles) {
     ArticleDispatcher.handleViewAction({
       type: ArticleConstants.ActionTypes.UPDATE_Article,
@@ -20125,6 +20129,7 @@ var ArticleActions = {
       Articles:Articles
     });
   },
+  /*Create a dispatcher call for delete Article*/
   destroyArticle: function(id,Articles) {
     ArticleDispatcher.handleViewAction({
       type: ArticleConstants.ActionTypes.DESTROY_Article,
@@ -20136,6 +20141,7 @@ var ArticleActions = {
 
 module.exports = ArticleActions;
 },{"../constants/article-constants":161,"../dispatchers/article-dispatcher":162}],161:[function(require,module,exports){
+/*Constants used to mark the actions types*/
 var ArticleConstants = {
   ActionTypes: {
     CREATE_Article: 'CREATE_Article',
@@ -20149,15 +20155,11 @@ module.exports = ArticleConstants;
 },{}],162:[function(require,module,exports){
 var copyProperties = require('react/lib/Object.assign');
 
+//importing the module flux, for dispatcher , so I left the rendering part only to react.js
 var Dispatcher = require('flux').Dispatcher;
 
-// module.exports = new Dispatcher();
-
 var ArticleDispatcher = copyProperties(new Dispatcher(), {
-  /**
-   * @param {object} action The details of the action, including the action's
-   * type and additional data coming from the server.
-   */
+  
   handleServerAction: function(action) {
     var payload = {
       source: 'SERVER_ACTION',
@@ -20166,10 +20168,7 @@ var ArticleDispatcher = copyProperties(new Dispatcher(), {
     this.dispatch(payload);
   },
 
-  /**
-   * @param {object} action The details of the action, including the action's
-   * type and additional data coming from the view.
-   */
+ 
   handleViewAction: function(action) {
     var payload = {
       source: 'VIEW_ACTION',
@@ -20221,9 +20220,6 @@ var Article = React.createClass({displayName: "Article",
     };
   },
   componentDidMount: function() {
-    // ArticleStore.addChangeEvent(function(data) {
-    //   if(this.isMounted()) this.setState({ editing: false });
-    // }.bind(this))
   },
   render: function() {
     return (
@@ -20433,12 +20429,11 @@ var ArticleStore = (function() {
       li.innerHTML = data.message;
       ul.appendChild(li);
       frm.insertBefore(ul,frm.firstChild);
-        // if(Articles.isMounted()) Articles.setState({ errors: data_ });
     },
     create: function(article,Articles) {
       Utils.sendJSON('/api/blog/article','post',{data:article,object:this},function(response,object){
         var article = JSON.parse(response);
-        _articles = _articles.concat(object._articles)
+        // _articles = _articles.concat(object._articles)
         _articles.unshift(article);
         object._articles = _articles;
         object.resetFields();

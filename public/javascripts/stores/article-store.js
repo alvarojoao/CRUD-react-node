@@ -52,7 +52,6 @@ var ArticleStore = (function() {
     create: function(article,Articles) {
       Utils.sendJSON('/api/blog/article','post',{data:article,object:this},function(response,object){
         var article = JSON.parse(response);
-        _articles = _articles.concat(object._articles)
         _articles.unshift(article);
         object._articles = _articles;
         object.resetFields();
