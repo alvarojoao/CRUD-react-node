@@ -20458,7 +20458,7 @@ var ArticleStore = (function() {
     },
     update: function(article,Article) {
       var index = this.find(article.id);
-      article.id = parseInt(article.id);
+      article.id = article.id;
       if(index === undefined) return this.failArticles(Article,{message:'Invalid Id'});
       Utils.sendJSON('/api/blog/article/'+article.id,'put',{data:article,object:this},function(response,object){
         var article = JSON.parse(response);
@@ -20473,8 +20473,14 @@ var ArticleStore = (function() {
       var index = this.find(id);
       if(index === undefined) return this.failArticles(Articles,{message:'Invalid Id'});
       Utils.sendJSON('/api/blog/article/'+id,'delete',{data:{},object:this},function(response,object){
-        _articles.splice(index, 1);
-        object._articles = _articles;
+        object._articles.splice(index, 1);
+        _articles = object._articles.filter(function(object){
+                    var text = Articles.query;
+                    if(!text||((object.title.toLowerCase().indexOf(text.toLowerCase())>-1)
+                          ||(object.content.toLowerCase().indexOf(text.toLowerCase())>-1))) {
+                      return object
+                    }
+                  });
         object.updateArticles(Articles,_articles);
       },function(msg,object){
         object.failArticles(Articles,JSON.parse(msg));
@@ -20482,7 +20488,7 @@ var ArticleStore = (function() {
     },
 
     find: function(id) {
-      var id = parseInt(id);
+      // var id = parseInt(id);
       var found = undefined;
       this._articles.some(function(article, i) {
         if(article.id === id) found = i;

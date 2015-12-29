@@ -54,13 +54,21 @@ Repository.prototype.findArticle = function (id){
 
   /*Transational 'db' operations: Add and article with a particular id*/
 Repository.prototype.addArticle =  function (article){
-  article.id = this.articles.length+1;
+  article.id = guid();
   this.articles.push(article);
   var articleCl =  JSON.parse(JSON.stringify(article))
   articleCl.publishedDate = prettyDate(article.publishedDate);
   return articleCl;
 };
-
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
+}
   /*Transational 'db' operations: Remove and article with a particular id*/
 Repository.prototype.removeArticle =   function (id){
     var articleIndexs = this.articles.map(function(obj, index) {
